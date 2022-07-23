@@ -20,6 +20,7 @@ bash:
 	docker-compose exec node bash
 
 pre-commit:
+	# https://stackoverflow.com/questions/68859202/git-hook-hangs-when-launching-docker-compose
 	DOCKER_COMPOSE_OPTIONS="-T" $(MAKE) build
 	DOCKER_COMPOSE_OPTIONS="-T" $(MAKE) test
 
