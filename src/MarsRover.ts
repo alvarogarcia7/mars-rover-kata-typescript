@@ -10,6 +10,8 @@ export class MarsRover {
       this.position.decreaseY()
     } else if (commands === 'f') {
       this.position.increaseY()
+    } else {
+      throw Error(`Invalid command '${commands}'`)
     }
   }
 }
