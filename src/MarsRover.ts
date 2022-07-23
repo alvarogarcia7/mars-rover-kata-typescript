@@ -1,4 +1,4 @@
-export class Hiker {
+export class MarsRover {
   public askQuestion(question: string) {
     return 42
   }
