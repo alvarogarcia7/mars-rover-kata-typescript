@@ -37,7 +37,7 @@ describe.each([
   {input: {x: 0, y: 0, direction: 'N'}, commands: 'fb', expected: {x: 0, y: 0, direction: 'N'}},
   {input: {x: 0, y: 0, direction: 'N'}, commands: 'lf', expected: {x: -1, y: 0, direction: 'W'}},
 ])('Mars Rover', ({input, commands, expected}) => {
-  test(`moves after receiving one command: ${input.x}, ${input.y} facing ${input.direction}`, () => {
+  test(`moves after receiving commands '${commands}': ${input.x}, ${input.y} facing ${input.direction}`, () => {
     const startingPositionRover = aMarsRoverAt(input.x, input.y, input.direction)
     const expectedPositionRover = aMarsRoverAt(expected.x, expected.y, expected.direction)
 
