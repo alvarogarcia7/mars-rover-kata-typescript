@@ -8,9 +8,9 @@ export class MarsRover {
   public move(commands: string) {
     if (commands === 'b') {
       this.position.decreaseY()
-      return
+    } else if (commands === 'f') {
+      this.position.increaseY()
     }
-    this.position.increaseY()
   }
 }
 
