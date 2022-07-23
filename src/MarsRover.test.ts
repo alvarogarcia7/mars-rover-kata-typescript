@@ -1,4 +1,4 @@
-import {MarsRover, Position} from './MarsRover'
+import {Direction, MarsRover, Position} from './MarsRover'
 
 function aMarsRoverAt(x, y, directionRaw) {
   return new MarsRover(Position.at(x, y).facing(directionRaw))
@@ -40,5 +40,17 @@ describe.each([
     startingPositionRover.move(commands)
 
     expect(startingPositionRover).toEqual(expectedPositionRover)
+  })
+})
+
+describe.each([
+  {input: 'N', expected: 'W'},
+])('Position', ({input, expected}) => {
+  test(`turn left`, () => {
+    const direction = new Direction(input)
+
+    direction.left()
+
+    expect(direction).toEqual(new Direction(expected))
   })
 })
