@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  node:
+    image: "node"
+    # https://stackoverflow.com/questions/38546755/docker-compose-keep-container-running
+    tty: true
+    volumes:
+      - .:/app
+    working_dir: /app
