@@ -34,6 +34,10 @@ export class Direction {
   public left() {
     this.facing = this.map[this.facing].left
   }
+
+  public right() {
+    this.facing = this.map[this.facing].right
+  }
 }
 
 export class Position {
