@@ -5,13 +5,13 @@ down:
 	docker-compose down
 
 build:
-	docker-compose exec --no-TTY node yarn compile
+	docker-compose exec ${DOCKER_COMPOSE_OPTIONS} node yarn compile
 
 build-watch:
 	docker-compose exec node yarn compile:watch
 
 test:
-	docker-compose exec --no-TTY node yarn test
+	docker-compose exec ${DOCKER_COMPOSE_OPTIONS} node yarn test
 
 test-watch:
 	docker-compose exec node yarn test:watch
@@ -19,7 +19,9 @@ test-watch:
 bash:
 	docker-compose exec node bash
 
-pre-commit: build test
+pre-commit:
+	DOCKER_COMPOSE_OPTIONS="-T" $(MAKE) build
+	DOCKER_COMPOSE_OPTIONS="-T" $(MAKE) test
 
 
 install: install-githooks
