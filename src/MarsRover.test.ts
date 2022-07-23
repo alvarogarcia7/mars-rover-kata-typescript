@@ -45,6 +45,9 @@ describe.each([
 
 describe.each([
   {input: 'N', expected: 'W'},
+  {input: 'W', expected: 'S'},
+  {input: 'S', expected: 'E'},
+  {input: 'E', expected: 'N'},
 ])('Position', ({input, expected}) => {
   test(`turn left`, () => {
     const direction = new Direction(input)
