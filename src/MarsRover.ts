@@ -26,7 +26,7 @@ export class Direction {
   }
 
   public left() {
-    this.facing = 'E'
+    this.facing = 'W'
   }
 }
 
