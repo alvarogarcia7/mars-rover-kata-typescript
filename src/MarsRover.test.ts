@@ -1,5 +1,16 @@
 import {MarsRover, Position} from './MarsRover'
 
+describe('Mars Rover', () => {
+  test(`cannot accept an invalid command`, () => {
+    const input = {x: 0, y: 0, direction: 'N'}
+    const startingPositionRover = new MarsRover(Position.at(input.x, input.y).facing(input.direction))
+
+    expect(() => {
+      startingPositionRover.move('X')
+    }).toThrow("Invalid command 'X'")
+  })
+})
+
 describe.each([
   {input: {x: 0, y: 0, direction: 'N'}, expected: {x: 0, y: 0, direction: 'N'}},
 ])('Mars Rover', ({input, expected}) => {
