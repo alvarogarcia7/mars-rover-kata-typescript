@@ -1,4 +1,19 @@
+# Mars Rover kata, in Typescript
+
 # TypeScript Jest boilerplate
+
+(Copied from https://github.com/swkBerlin/kata-bootstraps/commit/50729acec99c017d2e028d4e78bc6ee2a6a7324b)
+    
+```
+commit 50729acec99c017d2e028d4e78bc6ee2a6a7324b (HEAD -> master, origin/master, origin/HEAD)
+Merge: 70ae9d2 19a2555
+Author: Martin Klose <martin.klose@klosebrothers.de>
+Date:   Tue Jul 19 17:46:05 2022 +0200
+
+    Merge pull request #189 from Riggs333/update-to-latest-kotlin
+
+    Update dependencies of kotlin junit
+```
 
 This boilerplate uses TypeScript and Jest as testing framework.
 Test files should are picked based on their name, here's a few examples that will get picked up by Jest:
