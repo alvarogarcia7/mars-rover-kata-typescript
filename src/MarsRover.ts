@@ -3,7 +3,8 @@ export class MarsRover {
   constructor(position: Position) {
     this.position = position
   }
-  public move(commands: string){
+  public move(commands: string) {
+    this.position.increaseY()
   }
 }
 
@@ -32,5 +33,9 @@ export class Position {
     this.x = x
     this.y = y
     this.direction = direction
+  }
+
+  public increaseY() {
+    this.y++
   }
 }
