@@ -5,7 +5,7 @@
   "author": "Charles Ahmadzadeh <superzadeh@outlook.com>",
   "scripts": {
     "check-types": "yarn compile:ts --noEmit",
-    "test": "cross-env NODE_ENV=test jest",
+    "test": "cross-env NODE_ENV=test jest --silent=false",
     "test:cover": "yarn test --coverage",
     "test:changed": "yarn test --watch",
     "test:ensure-failure": "bash ./ensure-a-failing-test.sh",
