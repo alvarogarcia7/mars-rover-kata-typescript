@@ -46,6 +46,10 @@ export class Direction {
   public forward(x) {
     Direction.map[this.facing].forward(x)
   }
+
+  public backward(x) {
+    Direction.map[this.facing].backward(x)
+  }
 }
 
 export class Position {
@@ -81,15 +85,7 @@ export class Position {
   }
 
   public backward() {
-    if (this.direction.facing === 'N') {
-      this.decreaseY()
-    } else if (this.direction.facing === 'S') {
-      this.increaseY()
-    } else if (this.direction.facing === 'W') {
-      this.increaseX()
-    } else if (this.direction.facing === 'E') {
-      this.decreaseX()
-    }
+    this.direction.backward(this)
   }
 
   public increaseX() {
