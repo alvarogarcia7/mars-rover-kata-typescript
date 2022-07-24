@@ -23,24 +23,28 @@ export class MarsRover {
 }
 
 export class Direction {
-  public facing: string
-  private map = {
-    N: {left: 'W', right: 'E'},
-    W: {left: 'S', right: 'N'},
-    S: {left: 'E', right: 'W'},
-    E: {left: 'N', right: 'S'}
+  private static map = {
+    N: {left: 'W', right: 'E', forward: (t) => t.increaseY(), backward: (t) => t.decreaseY()},
+    W: {left: 'S', right: 'N', forward: (t) => t.decreaseX(), backward: (t) => t.increaseX()},
+    S: {left: 'E', right: 'W', forward: (t) => t.decreaseY(), backward: (t) => t.increaseY()},
+    E: {left: 'N', right: 'S', forward: (t) => t.increaseX(), backward: (t) => t.decreaseX()}
   }
+  public facing: string
 
   constructor(facing: string) {
     this.facing = facing
   }
 
   public left() {
-    this.facing = this.map[this.facing].left
+    this.facing = Direction.map[this.facing].left
   }
 
   public right() {
-    this.facing = this.map[this.facing].right
+    this.facing = Direction.map[this.facing].right
+  }
+
+  public forward(x) {
+    Direction.map[this.facing].forward(x)
   }
 }
 
@@ -73,15 +77,7 @@ export class Position {
   }
 
   public forward() {
-    if (this.direction.facing === 'N') {
-      this.increaseY()
-    } else if (this.direction.facing === 'S') {
-      this.decreaseY()
-    } else if (this.direction.facing === 'W') {
-      this.decreaseX()
-    } else if (this.direction.facing === 'E') {
-      this.increaseX()
-    }
+    this.direction.forward(this)
   }
 
   public backward() {
@@ -96,19 +92,19 @@ export class Position {
     }
   }
 
-  private increaseX() {
+  public increaseX() {
     this.x++
   }
 
-  private decreaseX() {
+  public decreaseX() {
     this.x--
   }
 
-  private increaseY() {
+  public increaseY() {
     this.y++
   }
 
-  private decreaseY() {
+  public decreaseY() {
     this.y--
   }
 
