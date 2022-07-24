@@ -10,21 +10,17 @@ export class MarsRover {
       // TODO AGB: solve smell in_approrpriatre intimi
       if (this.position.direction.facing === 'W') {
         if (command === 'f') {
-          this.position.decreaseX()
+          this.position.forward()
         }
         return
       }
-      if (command === 'b') {
-        this.position.decreaseY()
-      } else if (command === 'f') {
-        this.position.increaseY()
-      } else if (command === 'l') {
-        this.position.turnLeft()
-      } else if (command === 'r') {
-        this.position.turnRight()
-      } else {
-        throw Error(`Invalid command '${command}'`)
+      if (this.position.direction.facing === 'S') {
+        if (command === 'f') {
+          this.position.forward()
+        }
+        return
       }
+      this.position.moveAll(command)
     })
   }
 }
@@ -71,6 +67,10 @@ export class Position {
     this.direction = direction
   }
 
+  public increaseX() {
+    this.x++
+  }
+
   public decreaseX() {
     this.x--
   }
@@ -89,5 +89,29 @@ export class Position {
 
   public turnRight() {
     this.direction.right()
+  }
+
+  public forward() {
+    if (this.direction.facing === 'N') {
+      this.increaseY()
+    } else if (this.direction.facing === 'S') {
+      this.decreaseY()
+    } else if (this.direction.facing === 'W') {
+      this.decreaseX()
+    }
+  }
+
+  public moveAll(command: string) {
+    if (command === 'b') {
+      this.decreaseY()
+    } else if (command === 'f') {
+      this.increaseY()
+    } else if (command === 'l') {
+      this.turnLeft()
+    } else if (command === 'r') {
+      this.turnRight()
+    } else {
+      throw Error(`Invalid command '${command}'`)
+    }
   }
 }
