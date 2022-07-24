@@ -88,22 +88,6 @@ export class Position {
     this.sumVector(this.direction.backward())
   }
 
-  public increaseX() {
-    this.x++
-  }
-
-  public decreaseX() {
-    this.x--
-  }
-
-  public increaseY() {
-    this.y++
-  }
-
-  public decreaseY() {
-    this.y--
-  }
-
   private sumVector(vector) {
     this.x += vector.x
     this.y += vector.y
