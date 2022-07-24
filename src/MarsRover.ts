@@ -1,4 +1,10 @@
 export class MarsRover {
+  private static map = {
+    f: (position) => position.forward(),
+    b: (position) => position.backward(),
+    l: (position) => position.turnLeft(),
+    r: (position) => position.turnRight(),
+  }
   private position: Position
 
   constructor(position: Position) {
@@ -8,7 +14,7 @@ export class MarsRover {
   public move(commands: string) {
     commands.split('').map((command) => {
       if (command === 'f') {
-        this.position.forward()
+        MarsRover.map[command](this.position)
       } else if (command === 'b') {
         this.position.backward()
       } else if (command === 'l') {
