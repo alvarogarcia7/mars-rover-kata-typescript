@@ -16,11 +16,11 @@ export class MarsRover {
       if (command === 'f') {
         MarsRover.map[command](this.position)
       } else if (command === 'b') {
-        this.position.backward()
+        MarsRover.map[command](this.position)
       } else if (command === 'l') {
-        this.position.turnLeft()
+        MarsRover.map[command](this.position)
       } else if (command === 'r') {
-        this.position.turnRight()
+        MarsRover.map[command](this.position)
       } else {
         throw Error(`Invalid command '${command}'`)
       }
