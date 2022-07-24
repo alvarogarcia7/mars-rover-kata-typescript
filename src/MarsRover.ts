@@ -7,23 +7,10 @@ export class MarsRover {
 
   public move(commands: string) {
     commands.split('').map((command) => {
-      // TODO AGB: solve smell in_approrpriatre intimi
-      if (this.position.direction.facing === 'W') {
-        if (command === 'f') {
-          this.position.forward()
-        }
-        return
-      }
-      if (this.position.direction.facing === 'S') {
-        if (command === 'f') {
-          this.position.forward()
-        }
-        return
-      }
-      if (command === 'b') {
-        this.position.decreaseY()
-      } else if (command === 'f') {
+      if (command === 'f') {
         this.position.forward()
+      } else if (command === 'b') {
+        this.position.decreaseY()
       } else if (command === 'l') {
         this.position.turnLeft()
       } else if (command === 'r') {
