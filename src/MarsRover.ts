@@ -64,22 +64,6 @@ export class Position {
     this.direction = direction
   }
 
-  public increaseX() {
-    this.x++
-  }
-
-  public decreaseX() {
-    this.x--
-  }
-
-  public increaseY() {
-    this.y++
-  }
-
-  public decreaseY() {
-    this.y--
-  }
-
   public turnLeft() {
     this.direction.left()
   }
@@ -110,6 +94,22 @@ export class Position {
     } else if (this.direction.facing === 'E') {
       this.decreaseX()
     }
+  }
+
+  private increaseX() {
+    this.x++
+  }
+
+  private decreaseX() {
+    this.x--
+  }
+
+  private increaseY() {
+    this.y++
+  }
+
+  private decreaseY() {
+    this.y--
   }
 
 }
