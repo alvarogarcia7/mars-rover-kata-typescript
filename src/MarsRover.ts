@@ -54,7 +54,7 @@ export class Position {
     }
   }
 
-  public direction: Direction
+  private direction: Direction
   private x: number
   private y: number
 
