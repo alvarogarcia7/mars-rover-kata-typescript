@@ -20,7 +20,17 @@ export class MarsRover {
         }
         return
       }
-      this.position.moveAll(command)
+      if (command === 'b') {
+        this.position.decreaseY()
+      } else if (command === 'f') {
+        this.position.increaseY()
+      } else if (command === 'l') {
+        this.position.turnLeft()
+      } else if (command === 'r') {
+        this.position.turnRight()
+      } else {
+        throw Error(`Invalid command '${command}'`)
+      }
     })
   }
 }
@@ -101,17 +111,4 @@ export class Position {
     }
   }
 
-  public moveAll(command: string) {
-    if (command === 'b') {
-      this.decreaseY()
-    } else if (command === 'f') {
-      this.increaseY()
-    } else if (command === 'l') {
-      this.turnLeft()
-    } else if (command === 'r') {
-      this.turnRight()
-    } else {
-      throw Error(`Invalid command '${command}'`)
-    }
-  }
 }
