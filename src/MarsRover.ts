@@ -24,10 +24,10 @@ export class MarsRover {
 
 export class Direction {
   private static map = {
-    N: {left: 'W', right: 'E', forward: (t) => t.increaseY(), backward: (t) => t.decreaseY()},
-    W: {left: 'S', right: 'N', forward: (t) => t.decreaseX(), backward: (t) => t.increaseX()},
-    S: {left: 'E', right: 'W', forward: (t) => t.decreaseY(), backward: (t) => t.increaseY()},
-    E: {left: 'N', right: 'S', forward: (t) => t.increaseX(), backward: (t) => t.decreaseX()}
+    N: {left: 'W', right: 'E', forward: {x: 0, y: 1}, backward: (t) => t.decreaseY()},
+    W: {left: 'S', right: 'N', forward: {x: -1, y: 0}, backward: (t) => t.increaseX()},
+    S: {left: 'E', right: 'W', forward: {x: 0, y: -1}, backward: (t) => t.increaseY()},
+    E: {left: 'N', right: 'S', forward: {x: 1, y: 0}, backward: (t) => t.decreaseX()}
   }
   public facing: string
 
@@ -43,8 +43,8 @@ export class Direction {
     this.facing = Direction.map[this.facing].right
   }
 
-  public forward(x) {
-    Direction.map[this.facing].forward(x)
+  public forward() {
+    return Direction.map[this.facing].forward
   }
 
   public backward(x) {
@@ -81,7 +81,7 @@ export class Position {
   }
 
   public forward() {
-    this.direction.forward(this)
+    this.sumVector(this.direction.forward())
   }
 
   public backward() {
@@ -102,6 +102,11 @@ export class Position {
 
   public decreaseY() {
     this.y--
+  }
+
+  private sumVector(vector) {
+    this.x += vector.x
+    this.y += vector.y
   }
 
 }
