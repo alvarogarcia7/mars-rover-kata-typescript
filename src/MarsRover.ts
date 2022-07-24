@@ -13,15 +13,9 @@ export class MarsRover {
 
   public move(commands: string) {
     commands.split('').map((command) => {
-      if (command === 'f') {
+      try {
         MarsRover.map[command](this.position)
-      } else if (command === 'b') {
-        MarsRover.map[command](this.position)
-      } else if (command === 'l') {
-        MarsRover.map[command](this.position)
-      } else if (command === 'r') {
-        MarsRover.map[command](this.position)
-      } else {
+      } catch (e) {
         throw Error(`Invalid command '${command}'`)
       }
     })
