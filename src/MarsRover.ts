@@ -23,7 +23,7 @@ export class MarsRover {
       if (command === 'b') {
         this.position.decreaseY()
       } else if (command === 'f') {
-        this.position.increaseY()
+        this.position.forward()
       } else if (command === 'l') {
         this.position.turnLeft()
       } else if (command === 'r') {
