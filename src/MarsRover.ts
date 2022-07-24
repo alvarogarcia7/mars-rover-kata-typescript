@@ -10,7 +10,7 @@ export class MarsRover {
       if (command === 'f') {
         this.position.forward()
       } else if (command === 'b') {
-        this.position.decreaseY()
+        this.position.backward()
       } else if (command === 'l') {
         this.position.turnLeft()
       } else if (command === 'r') {
@@ -97,6 +97,18 @@ export class Position {
       this.decreaseX()
     } else if (this.direction.facing === 'E') {
       this.increaseX()
+    }
+  }
+
+  public backward() {
+    if (this.direction.facing === 'N') {
+      this.decreaseY()
+    } else if (this.direction.facing === 'S') {
+      this.increaseY()
+    } else if (this.direction.facing === 'W') {
+      this.increaseX()
+    } else if (this.direction.facing === 'E') {
+      this.decreaseX()
     }
   }
 
