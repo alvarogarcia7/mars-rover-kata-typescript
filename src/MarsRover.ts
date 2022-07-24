@@ -36,11 +36,11 @@ export class Direction {
   }
 
   public left() {
-    this.facing = Direction.map[this.facing].left
+    return new Direction(Direction.map[this.facing].left)
   }
 
   public right() {
-    this.facing = Direction.map[this.facing].right
+    return new Direction(Direction.map[this.facing].right)
   }
 
   public forward() {
@@ -73,11 +73,11 @@ export class Position {
   }
 
   public turnLeft() {
-    this.direction.left()
+    this.direction = this.direction.left()
   }
 
   public turnRight() {
-    this.direction.right()
+    this.direction = this.direction.right()
   }
 
   public forward() {

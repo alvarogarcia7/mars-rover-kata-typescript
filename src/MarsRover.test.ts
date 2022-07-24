@@ -78,9 +78,9 @@ describe.each([
   test(`turn left (${input})`, () => {
     const direction = new Direction(input)
 
-    direction.left()
+    const actual = direction.left()
 
-    expect(direction).toEqual(new Direction(expected))
+    expect(actual).toEqual(new Direction(expected))
   })
 })
 
@@ -93,8 +93,8 @@ describe.each([
   test(`turn right (${input})`, () => {
     const direction = new Direction(input)
 
-    direction.right()
+    const actual = direction.right()
 
-    expect(direction).toEqual(new Direction(expected))
+    expect(actual).toEqual(new Direction(expected))
   })
 })
