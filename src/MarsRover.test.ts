@@ -13,88 +13,88 @@ describe('Mars Rover', () => {
       startingPositionRover.move('X')
     }).toThrow("Invalid command 'X'")
   })
-})
 
-describe.each([
-  {input: {x: 0, y: 0, direction: 'N'}, expected: {x: 0, y: 0, direction: 'N'}},
-])('Mars Rover', ({input, expected}) => {
-  test(`stays at the landing position: ${input.x}, ${input.y} facing ${input.direction}`, () => {
-    const startingPositionRover = aMarsRoverAt(input.x, input.y, input.direction)
-    const expectedPositionRover = aMarsRoverAt(expected.x, expected.y, expected.direction)
+  describe.each([
+    {input: {x: 0, y: 0, direction: 'N'}, expected: {x: 0, y: 0, direction: 'N'}},
+  ])('stays at the landing position', ({input, expected}) => {
+    test(`${input.x}, ${input.y} facing ${input.direction}`, () => {
+      const startingPositionRover = aMarsRoverAt(input.x, input.y, input.direction)
+      const expectedPositionRover = aMarsRoverAt(expected.x, expected.y, expected.direction)
 
-    // no movement
+      // no movement
 
-    expect(startingPositionRover).toEqual(expectedPositionRover)
+      expect(startingPositionRover).toEqual(expectedPositionRover)
+    })
   })
-})
 
-describe.each([
-  {input: {x: 0, y: 0, direction: 'N'}, commands: 'f', expected: {x: 0, y: 1, direction: 'N'}},
-  {input: {x: 0, y: 0, direction: 'N'}, commands: 'b', expected: {x: 0, y: -1, direction: 'N'}},
-  {input: {x: 0, y: 0, direction: 'N'}, commands: 'l', expected: {x: 0, y: 0, direction: 'W'}},
-  {input: {x: 0, y: 0, direction: 'N'}, commands: 'r', expected: {x: 0, y: 0, direction: 'E'}},
-  {input: {x: 0, y: 0, direction: 'N'}, commands: 'ff', expected: {x: 0, y: 2, direction: 'N'}},
-  {input: {x: 0, y: 0, direction: 'N'}, commands: 'fb', expected: {x: 0, y: 0, direction: 'N'}},
-  {input: {x: 0, y: 0, direction: 'N'}, commands: 'lf', expected: {x: -1, y: 0, direction: 'W'}},
-  {input: {x: 0, y: 0, direction: 'S'}, commands: 'f', expected: {x: 0, y: -1, direction: 'S'}},
-])('Mars Rover', ({input, commands, expected}) => {
-  test(`moves after receiving commands '${commands}': ${input.x}, ${input.y} facing ${input.direction}`, () => {
-    const startingPositionRover = aMarsRoverAt(input.x, input.y, input.direction)
-    const expectedPositionRover = aMarsRoverAt(expected.x, expected.y, expected.direction)
+  describe.each([
+    {input: {x: 0, y: 0, direction: 'N'}, commands: 'f', expected: {x: 0, y: 1, direction: 'N'}},
+    {input: {x: 0, y: 0, direction: 'N'}, commands: 'b', expected: {x: 0, y: -1, direction: 'N'}},
+    {input: {x: 0, y: 0, direction: 'N'}, commands: 'l', expected: {x: 0, y: 0, direction: 'W'}},
+    {input: {x: 0, y: 0, direction: 'N'}, commands: 'r', expected: {x: 0, y: 0, direction: 'E'}},
+    {input: {x: 0, y: 0, direction: 'N'}, commands: 'ff', expected: {x: 0, y: 2, direction: 'N'}},
+    {input: {x: 0, y: 0, direction: 'N'}, commands: 'fb', expected: {x: 0, y: 0, direction: 'N'}},
+    {input: {x: 0, y: 0, direction: 'N'}, commands: 'lf', expected: {x: -1, y: 0, direction: 'W'}},
+    {input: {x: 0, y: 0, direction: 'S'}, commands: 'f', expected: {x: 0, y: -1, direction: 'S'}},
+  ])('moves after receiving commands', ({input, commands, expected}) => {
+    test(`'${commands}': ${input.x}, ${input.y} facing ${input.direction}`, () => {
+      const startingPositionRover = aMarsRoverAt(input.x, input.y, input.direction)
+      const expectedPositionRover = aMarsRoverAt(expected.x, expected.y, expected.direction)
 
-    startingPositionRover.move(commands)
+      startingPositionRover.move(commands)
 
-    expect(startingPositionRover).toEqual(expectedPositionRover)
+      expect(startingPositionRover).toEqual(expectedPositionRover)
+    })
   })
-})
 
-describe.each([
-  {input: {x: 0, y: 0, direction: 'N'}, commands: 'f', expected: {x: 0, y: 1}},
-  {input: {x: 0, y: 0, direction: 'S'}, commands: 'f', expected: {x: 0, y: -1}},
-  {input: {x: 0, y: 0, direction: 'E'}, commands: 'f', expected: {x: 1, y: 0}},
-  {input: {x: 0, y: 0, direction: 'W'}, commands: 'f', expected: {x: -1, y: 0}},
+  describe.each([
+    {input: {x: 0, y: 0, direction: 'N'}, commands: 'f', expected: {x: 0, y: 1}},
+    {input: {x: 0, y: 0, direction: 'S'}, commands: 'f', expected: {x: 0, y: -1}},
+    {input: {x: 0, y: 0, direction: 'E'}, commands: 'f', expected: {x: 1, y: 0}},
+    {input: {x: 0, y: 0, direction: 'W'}, commands: 'f', expected: {x: -1, y: 0}},
 
-  {input: {x: 0, y: 0, direction: 'N'}, commands: 'b', expected: {x: 0, y: -1}},
-  {input: {x: 0, y: 0, direction: 'S'}, commands: 'b', expected: {x: 0, y: 1}},
-  {input: {x: 0, y: 0, direction: 'E'}, commands: 'b', expected: {x: -1, y: 0}},
-  {input: {x: 0, y: 0, direction: 'W'}, commands: 'b', expected: {x: 1, y: 0}},
-])('Mars Rover', ({input, commands, expected}) => {
-  test(`advancing movements never affect direction. Move '${commands}'. ${input.x}, ${input.y} facing ${input.direction}`, () => {
-    const startingPositionRover = aMarsRoverAt(input.x, input.y, input.direction)
-    const expectedPositionRover = aMarsRoverAt(expected.x, expected.y, input.direction)
+    {input: {x: 0, y: 0, direction: 'N'}, commands: 'b', expected: {x: 0, y: -1}},
+    {input: {x: 0, y: 0, direction: 'S'}, commands: 'b', expected: {x: 0, y: 1}},
+    {input: {x: 0, y: 0, direction: 'E'}, commands: 'b', expected: {x: -1, y: 0}},
+    {input: {x: 0, y: 0, direction: 'W'}, commands: 'b', expected: {x: 1, y: 0}},
+  ])('advancing movements never affect direction', ({input, commands, expected}) => {
+    test(`Move '${commands}'. ${input.x}, ${input.y} facing ${input.direction}`, () => {
+      const startingPositionRover = aMarsRoverAt(input.x, input.y, input.direction)
+      const expectedPositionRover = aMarsRoverAt(expected.x, expected.y, input.direction)
 
-    startingPositionRover.move(commands)
+      startingPositionRover.move(commands)
 
-    expect(startingPositionRover).toEqual(expectedPositionRover)
+      expect(startingPositionRover).toEqual(expectedPositionRover)
+    })
   })
-})
 
-describe.each([
-  {input: 'N', expected: 'W'},
-  {input: 'W', expected: 'S'},
-  {input: 'S', expected: 'E'},
-  {input: 'E', expected: 'N'},
-])('Position', ({input, expected}) => {
-  test(`turn left (${input})`, () => {
-    const direction = new Direction(input)
+  describe.each([
+    {input: 'N', expected: 'W'},
+    {input: 'W', expected: 'S'},
+    {input: 'S', expected: 'E'},
+    {input: 'E', expected: 'N'},
+  ])('Turn left', ({input, expected}) => {
+    test(`${input}`, () => {
+      const direction = new Direction(input)
 
-    const actual = direction.left()
+      const actual = direction.left()
 
-    expect(actual).toEqual(new Direction(expected))
+      expect(actual).toEqual(new Direction(expected))
+    })
   })
-})
 
-describe.each([
-  {input: 'N', expected: 'E'},
-  {input: 'W', expected: 'N'},
-  {input: 'S', expected: 'W'},
-  {input: 'E', expected: 'S'},
-])('Position', ({input, expected}) => {
-  test(`turn right (${input})`, () => {
-    const direction = new Direction(input)
+  describe.each([
+    {input: 'N', expected: 'E'},
+    {input: 'W', expected: 'N'},
+    {input: 'S', expected: 'W'},
+    {input: 'E', expected: 'S'},
+  ])('Turn Right', ({input, expected}) => {
+    test(`${input}`, () => {
+      const direction = new Direction(input)
 
-    const actual = direction.right()
+      const actual = direction.right()
 
-    expect(actual).toEqual(new Direction(expected))
+      expect(actual).toEqual(new Direction(expected))
+    })
   })
 })
