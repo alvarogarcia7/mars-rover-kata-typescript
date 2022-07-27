@@ -1,6 +1,6 @@
-import {Direction, MarsRover, Position} from './MarsRover'
+import {Direction, MarsRover, Position, World} from './MarsRover'
 
-function aMarsRoverAt(x, y, directionRaw) {
+function aMarsRoverAt(x, y, directionRaw, world: World = World.unlimited()) {
   return new MarsRover(Position.at(x, y).facing(directionRaw))
 }
 
@@ -95,6 +95,20 @@ describe('Mars Rover', () => {
       const actual = direction.right()
 
       expect(actual).toEqual(new Direction(expected))
+    })
+  })
+
+  describe.each([
+    {side: 'left', input: {x: 0, y: 0, direction: 'W'}, commands: 'f', expected: {x: 15, y: 0}},
+  ])('The world has limits', ({side, input, commands, expected}) => {
+    test(`on the ${side}:`, () => {
+      const world = World.wrapping(15, 15)
+      const startingPositionRover = aMarsRoverAt(input.x, input.y, input.direction, world)
+      const expectedPositionRover = aMarsRoverAt(expected.x, expected.y, input.direction, world)
+
+      startingPositionRover.move('f')
+
+      expect(startingPositionRover).toEqual(expectedPositionRover)
     })
   })
 })

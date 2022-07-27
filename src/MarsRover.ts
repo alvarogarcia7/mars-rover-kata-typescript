@@ -94,3 +94,13 @@ export class Position {
   }
 
 }
+
+export class World {
+  public static unlimited() {
+    return {}
+  }
+
+  public static wrapping(width: number, height: number) {
+    return {}
+  }
+}
