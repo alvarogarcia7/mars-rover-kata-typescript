@@ -1,4 +1,4 @@
-import {Direction, MarsRover, ObstaclesInWorld, Position, World} from './MarsRover'
+import {Direction, MarsRover, ObstaclesInWorld, Point, Position, World} from './MarsRover'
 
 function aMarsRoverAt(x, y, directionRaw, world: World = World.unlimited()) {
   return new MarsRover(Position.at(x, y).withinWorld(world).facing(directionRaw))
@@ -121,7 +121,8 @@ describe('Mars Rover', () => {
     {input: {x: 0, y: 0, direction: 'N'}, commands: 'ffl', obstacles: [{x: 0, y: 2}], expected: {x: 0, y: 1, direction: 'W'}},
   ])('The world has obstacles', ({input, commands, obstacles, expected}) => {
     test(``, () => {
-      const world = ObstaclesInWorld.with(World.unlimited(), obstacles)
+      const obstaclesAsPoints = obstacles.map((o) => new Point(o.x, o.y))
+      const world = ObstaclesInWorld.with(World.unlimited(), obstaclesAsPoints)
       const startingPositionRover = aMarsRoverAt(input.x, input.y, input.direction, world)
       const expectedPositionRover = aMarsRoverAt(expected.x, expected.y, expected.direction, world)
 

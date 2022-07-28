@@ -60,6 +60,10 @@ export class Point {
     this.x = x
     this.y = y
   }
+
+  public sum(other: Point) {
+    return new Point(this.x + other.x, this.y + other.y)
+  }
 }
 
 export class Position {
@@ -102,9 +106,8 @@ export class Position {
     this.sumVector(this.direction.backward())
   }
 
-  private sumVector(vector) {
-    const newPoint = new Point(this.point.x + vector.x, this.point.y + vector.y)
-    this.point = this.world.simplify(this.point, newPoint)
+  private sumVector(vector: Point) {
+    this.point = this.world.move(this.point, vector)
   }
 
 }
@@ -118,7 +121,7 @@ export abstract class World {
     return new WrappingWorld(width, height)
   }
 
-  public abstract simplify(old: Point, newValue: Point): Point
+  public abstract move(origin: Point, vector: Point): Point
 }
 
 export abstract class ObstaclesInWorld {
@@ -140,12 +143,13 @@ class WorldWithObstacles implements World {
     this.obstacles = obstacles
   }
 
-  public simplify(old: Point, newValue: Point): Point {
+  public move(origin: Point, vector: Point): Point {
+    const newValue = origin.sum(vector)
     const obstacleFound = this.obstacles.some((e: Point) => e.x === newValue.x && e.y === newValue.y)
     if (obstacleFound) {
-      return old
+      return origin
     }
-    return this.world.simplify(old, newValue)
+    return this.world.move(origin, vector)
   }
 }
 
@@ -158,13 +162,14 @@ class WrappingWorld implements World {
     this.width = width
   }
 
-  public simplify(old: Point, point: Point): Point {
+  public move(origin: Point, vector: Point): Point {
+    const point = origin.sum(vector)
     return new Point((point.x + this.width) % this.width, (point.y + this.height) % this.height)
   }
 }
 
 class UnlimitedWorld implements World {
-  public simplify(old: Point, value: Point): Point {
-    return value
+  public move(origin: Point, vector: Point): Point {
+    return origin.sum(vector)
   }
 }
