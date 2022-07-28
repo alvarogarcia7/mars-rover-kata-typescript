@@ -116,13 +116,14 @@ describe('Mars Rover', () => {
   })
 
   describe.each([
-    {input: {x: 0, y: 0, direction: 'N'}, commands: 'f', obstacles: [{x: 0, y: 1}], expected: {x: 0, y: 0}},
-    {input: {x: 0, y: 0, direction: 'N'}, commands: 'ff', obstacles: [{x: 0, y: 2}], expected: {x: 0, y: 1}},
+    {input: {x: 0, y: 0, direction: 'N'}, commands: 'f', obstacles: [{x: 0, y: 1}], expected: {x: 0, y: 0, direction: 'N'}},
+    {input: {x: 0, y: 0, direction: 'N'}, commands: 'ff', obstacles: [{x: 0, y: 2}], expected: {x: 0, y: 1, direction: 'N'}},
+    {input: {x: 0, y: 0, direction: 'N'}, commands: 'ffl', obstacles: [{x: 0, y: 2}], expected: {x: 0, y: 1, direction: 'W'}},
   ])('The world has obstacles', ({input, commands, obstacles, expected}) => {
     test(``, () => {
       const world = ObstaclesInWorld.with(World.unlimited(), obstacles)
       const startingPositionRover = aMarsRoverAt(input.x, input.y, input.direction, world)
-      const expectedPositionRover = aMarsRoverAt(expected.x, expected.y, input.direction, world)
+      const expectedPositionRover = aMarsRoverAt(expected.x, expected.y, expected.direction, world)
 
       startingPositionRover.move(commands)
 
