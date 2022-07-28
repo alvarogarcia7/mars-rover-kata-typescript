@@ -77,13 +77,11 @@ export class Position {
   }
 
   private direction: Direction
-  private x: number
-  private y: number
+  private point: Point
   private world: World
 
   private constructor(x: number, y: number, direction: Direction, world: World) {
-    this.x = x
-    this.y = y
+    this.point = new Point(x, y)
     this.direction = direction
     this.world = world
   }
@@ -105,11 +103,8 @@ export class Position {
   }
 
   private sumVector(vector) {
-    const oldPoint = new Point(this.x, this.y)
-    const newPoint = new Point(this.x + vector.x, this.y + vector.y)
-    const point = this.world.simplify(oldPoint, newPoint)
-    this.x = point.x
-    this.y = point.y
+    const newPoint = new Point(this.point.x + vector.x, this.point.y + vector.y)
+    this.point = this.world.simplify(this.point, newPoint)
   }
 
 }
@@ -164,9 +159,7 @@ class WrappingWorld implements World {
   }
 
   public simplify(old: Point, point: Point): Point {
-    const x = point.x
-    const y = point.y
-    return new Point((x + this.width) % this.width, (y + this.height) % this.height)
+    return new Point((point.x + this.width) % this.width, (point.y + this.height) % this.height)
   }
 }
 
