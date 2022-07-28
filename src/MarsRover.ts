@@ -52,6 +52,16 @@ export class Direction {
   }
 }
 
+export class Point {
+  public x: number
+  public y: number
+
+  constructor(x: number, y: number) {
+    this.x = x
+    this.y = y
+  }
+}
+
 export class Position {
   public static at(x: number, y: number) {
     return {
@@ -95,8 +105,11 @@ export class Position {
   }
 
   private sumVector(vector) {
-    this.x = this.world.simplifyX(this.x + vector.x)
-    this.y = this.world.simplifyY(this.y + vector.y)
+    const oldPoint = new Point(this.x, this.y)
+    const newPoint = new Point(this.x + vector.x, this.y + vector.y)
+    const point = this.world.simplify(oldPoint, newPoint)
+    this.x = point.x
+    this.y = point.y
   }
 
 }
@@ -110,21 +123,35 @@ export abstract class World {
     return new WrappingWorld(width, height)
   }
 
-  public abstract simplifyX(value: number): number
-  public abstract simplifyY(value: number): number
+  public abstract simplify(old: Point, newValue: Point): Point
 }
 
 export abstract class ObstaclesInWorld {
   public static none(world: World): World {
-    throw Error()
+    return world
   }
 
-  public static with(world: World, obstacles: Array<{x: number, y: number}>): World {
-    throw Error()
+  public static with(world: World, obstacles: Point[]): World {
+    return new WorldWithObstacles(world, obstacles)
+  }
+}
+
+class WorldWithObstacles implements World {
+  private obstacles: Point[]
+  private world: World
+
+  constructor(world: World, obstacles: Point[]) {
+    this.world = world
+    this.obstacles = obstacles
   }
 
-  public abstract simplifyX(value: number): number
-  public abstract simplifyY(value: number): number
+  public simplify(old: Point, newValue: Point): Point {
+    const obstacleFound = this.obstacles.some((e: Point) => e.x === newValue.x && e.y === newValue.y)
+    if (obstacleFound) {
+      return old
+    }
+    return this.world.simplify(old, newValue)
+  }
 }
 
 class WrappingWorld implements World {
@@ -136,21 +163,15 @@ class WrappingWorld implements World {
     this.width = width
   }
 
-  public simplifyX(value: number): number {
-    return (value + this.width) % this.width
-  }
-
-  public simplifyY(value: number): number {
-    return (value + this.height) % this.height
+  public simplify(old: Point, point: Point): Point {
+    const x = point.x
+    const y = point.y
+    return new Point((x + this.width) % this.width, (y + this.height) % this.height)
   }
 }
 
 class UnlimitedWorld implements World {
-  public simplifyX(value: number): number {
-    return value
-  }
-
-  public simplifyY(value: number): number {
+  public simplify(old: Point, value: Point): Point {
     return value
   }
 }
