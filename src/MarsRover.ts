@@ -114,6 +114,19 @@ export abstract class World {
   public abstract simplifyY(value: number): number
 }
 
+export abstract class ObstaclesInWorld {
+  public static none(world: World): World {
+    throw Error()
+  }
+
+  public static with(world: World, obstacles: Array<{x: number, y: number}>): World {
+    throw Error()
+  }
+
+  public abstract simplifyX(value: number): number
+  public abstract simplifyY(value: number): number
+}
+
 class WrappingWorld implements World {
   private height: number
   private width: number
